@@ -1,5 +1,7 @@
 project(darling-MITKerberosShim)
 
+remove_sdk_framework(Kerberos)
+
 set(DYLIB_INSTALL_NAME "/System/Library/Frameworks/Kerberos.framework/Versions/A/Libraries/libHeimdalProxy.dylib")
 
 add_darling_library(HeimdalProxy
@@ -21,11 +23,18 @@ target_link_options(HeimdalProxy PRIVATE
 set(DYLIB_COMPATIBILITY_VERSION "5.0.0")
 set(DYLIB_CURRENT_VERSION "6.0.0")
 
+set(FRAMEWORK_VERSION "A")
+
 install(TARGETS HeimdalProxy DESTINATION libexec/darling/System/Library/Frameworks/Kerberos.framework/Versions/A/Libraries)
+
+generate_sdk_framework(Kerberos
+    VERSION ${FRAMEWORK_VERSION}
+    HEADER "darling-framework/include/Kerberos"
+)
 
 add_framework(Kerberos
 	CURRENT_VERSION
-	VERSION "A"
+	VERSION ${FRAMEWORK_VERSION}
 	FAT
 	SOURCES
 		auth_context.c

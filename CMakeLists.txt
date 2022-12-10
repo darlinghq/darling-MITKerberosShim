@@ -29,7 +29,7 @@ install(TARGETS HeimdalProxy DESTINATION libexec/darling/System/Library/Framewor
 
 generate_sdk_framework(Kerberos
     VERSION ${FRAMEWORK_VERSION}
-    HEADER "darling-framework/include/Kerberos"
+    HEADER "darling/include/Kerberos"
 )
 
 add_framework(Kerberos
